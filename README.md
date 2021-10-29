@@ -11,7 +11,7 @@ Go into the newly created directory (cd command)
 Then try below commands
 git init
 
-git remote add origin https://github.com/sudhamadhuripoojari/IASS-Project.git
+git remote add origin https://github.com/sanianaz/IASS-Quiz-Project.git
 
 OPTIONAL (if you work on default master branch) : git checkout -b
 
