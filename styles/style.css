@@ -1,0 +1,303 @@
+/*FOR THE LANDING PAGE*/
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  overflow-x: hidden;
+}
+
+/*ADDED FLEXBOX FOR GAME SHORTCUT AND HIGHSCORE SHORTCUT
+.optionbox {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(85, 160, 240, 0.6);
+}
+.options {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: black;
+  font-weight: 600;
+}*/
+
+
+/*WANTED TO MAKE THE BRAIN SAY A FUN FACT*/
+#demo {
+  font-size: 0.8rem;
+  animation: fadeOut ease 60s infinite;
+  -webkit-animation: fadeOut ease 60s infinite;
+}
+@keyframes fadeOut {
+  0% {
+    opacity:1;
+  }
+  20% {
+    opacity:0.2;
+  }
+  50% {
+    color: black;
+    opacity: 0;
+  }
+  100% {
+    opacity:0;
+    display: none;
+    color: white;
+  }
+}
+
+
+section {
+  padding: 100px;
+  background: #fff;
+  height: 100vh;
+}
+section header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10000;
+}
+section header .logo {
+  position: relative;
+  font-size: 28px;
+  color: #111;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  opacity: 0;
+  animation: slideLeft 0.5s ease-in-out forwards;
+  text-transform: capitalize;
+}
+section header .logo .firstLetter {
+  font-size: 65px;
+}
+section header .toggle {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: url(/Images/menu.png);
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  z-index: 10000;
+  opacity: 0;
+  animation: slideRight 0.5s ease-in-out forwards;
+  animation-delay: 0.5s;
+}
+section header .toggle.active {
+  background: url(/Images/close.png);
+  background-size: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+.navigation {
+  position: absolute;
+  display: flex;
+  right: 150px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+  
+}
+.navigation.active {
+  opacity: 1;
+  visibility: visible;
+  
+}
+.navigation li {
+  list-style: none;
+}
+.navigation li a {
+  color: #111;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0 20px;
+  font-weight: 600;
+  display: inline-block;
+  opacity: 0;
+  text-transform: uppercase;
+}
+.navigation.active li a {
+  animation: slideRight 0.5s ease-in-out forwards;
+  animation-delay: calc(0.2s * var(--i));
+}
+section .container {
+  position: absolute;
+  display: flex;
+  height: calc(100% - 200px);
+  width: calc(100% - 200px);
+  z-index: 100;
+}
+section .container .box {
+  position: relative;
+  width: 25%;
+  height: 100%;
+  background: #fff;
+  overflow: hidden;
+  border-right: 10px solid #fff;
+}
+section .container .box:last-child {
+  border-right: none;
+}
+section .container .box .imgBx {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  transition: 0.5s;
+  opacity: 0;
+  animation: slideRight 0.5s ease-in-out forwards;
+  animation-delay: calc(0.2s * var(--i));
+}
+section .container .box .imgBx.active {
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  width: calc(100% - 200px);
+  height: calc(100% - 200px);
+  z-index: 1000;
+  filter: grayscale(0);
+  opacity: 1;
+}
+section .container .box .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+section .container .box .imgBx:hover img {
+  transform: scale(1.2);
+}
+section .container .box .imgBx.active:hover img {
+  transform: scale(1);
+}
+@keyframes slideRight {
+  0% {
+    transform: translateX(150px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(-150px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1000px) {
+  #demo {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  section {
+    padding: 80px 20px;
+  }
+  section header {
+    height: 70px;
+    padding: 10px 20px;
+  }
+  .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #fff;
+  }
+  .navigation li a {
+    color: #111;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 5px 10px;
+    letter-spacing: 1px;
+    display: inline-block;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  section .container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: calc(100% - 30px);
+    height: calc(100% - 170px);
+  }
+  section .container .box {
+    width: 100%;
+    height: 25%;
+    border-bottom: 10px solid #fff;
+  }
+  section .container .box .imgBx.active {
+    top: 70px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 160px);
+  }
+  section .container .box:last-child {
+    border-right: 10px solid #fff;
+  }
+}
+
+ /* Brain Animation*/
+
+ .think-logo-div {
+  text-align:center;
+  position:relative;
+  padding-top:5px;
+  color:white;
+}
+
+.think-logo-div .just-icon {
+  animation: MoveUpDown 1s ease-in-out infinite;
+}
+
+.just-icon {
+  width:70px;
+   position:absolute;
+   margin-right: 20px;
+   transform: translateX(-50%);
+   margin-top: -10px;
+   margin-left:25px;
+   top:-10px;
+ }
+ @keyframes MoveUpDown {
+   0% {
+     top: -18px;
+   }
+   50% {
+     top:-10px;
+   }
+   100% {
+     top: -18px;
+ }
+ }

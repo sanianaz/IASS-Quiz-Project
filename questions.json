@@ -1,0 +1,27 @@
+[
+    {
+    "question": "Inside which HTML element do we put the JavaScript?",
+    "choice1": "<script>",
+    "choice2": "<javascript>",
+    "choice3": "<js>",
+    "choice4": "<scripting>",
+    "answer": 1
+},
+{
+"question": "Where is Mount Fuji located?",
+"choice1": "China",
+"choice2": "Japan",
+"choice3": "Taiwan",
+"choice4": "South Korea",
+"answer": 2
+
+},
+{
+"question": "Which animal except us humans like spicy food?",
+    "choice1": "The Capybara",
+    "choice2": "Lemurs",
+    "choice3": "Tree Shrews",
+    "choice4": "Kiwi birds",
+    "answer": 3
+}
+]
