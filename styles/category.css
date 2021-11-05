@@ -32,9 +32,26 @@ body {
 }
 
 .bg-movie {
-  background-image: url(/Images/movie.jpg);
-  background-size: cover;
-  background-position: center;
+  /*background-image: url(https://codetalks.tv/public/svg/global/texture-dev.svg);
+    background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./landmark4.png');*/
+    
+    
+    background-image: url('/Images/movie1.gif');
+    /*background-image:url('/Images/geo.png');*/
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    
+    width: 100vw;
+    background-repeat: no-repeat ;
+   background-size: cover;
+   
+    /*background-position: 0px 0px;*/
+     background-position: cover;
+  top:0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   height: 100vh;
   width: 100%;
   padding: 1rem;
@@ -104,7 +121,7 @@ body {
 .bg-sports {
   background-image: url(/Images/Sports.jpg);
   background-size: cover;
-  background-position: center;
+  background-position: cover;
   height: 100vh;
   width: 100%;
   padding: 1rem;
@@ -126,6 +143,7 @@ button {
   padding: 1rem;
   margin: 10rem;
   border: 1px solid lightblue;
+  cursor: pointer;
 }
 
 button:hover {
@@ -152,4 +170,124 @@ button:hover {
   color: darkblue;
   border: 1px solid gold;
 
+}
+
+/*model rules*/
+
+
+.info-box
+{
+
+  flex-direction: column;
+  width:500px;
+  background:white;
+  border-radius: 5px;
+  opacity: 0;
+  z-index: -1;
+  margin-top: -22rem;
+  transform:translateX(70%);
+  pointer-events: none;
+  color: black;
+  text-shadow:none;
+  
+
+}
+
+
+.info-box.activeInfo
+{
+
+opacity:1;
+z-index:2;
+pointer-events: auto;
+transform:translateX(70%);
+
+}
+
+.info-box .info-title
+{
+height:30px;
+width: 86%;
+border-bottom:1px solid  lightgray;
+display: flex;
+align-items: center;
+padding: 0 35px;
+font-size: 1.2rem;
+font-weight: 500;
+
+}
+
+.info-box .info-list
+{
+  padding: 15px 35px;
+  margin-top:5px;
+ box-shadow: none;
+ font-size:1rem; 
+}
+
+
+.info-box .info-list .info
+{
+margin:5px 0;
+
+}
+
+
+.info-box .info-list .info span{
+  font-weight: 600;
+  color:rgba(8, 8, 8, 0.8);
+}
+
+
+.info-box .buttons
+{
+  height: 60px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding:0 35px;
+  
+  
+  border-top:1 px solid lightgray;
+}
+
+.info-box .buttons button {
+
+  margin: 0 5px;
+  height: 35px;
+  width:85px;
+  border-radius: 5px;
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+  text-align: center;
+transition:all 0.3s ease;
+border-color: rgb(114, 58, 5);
+font-size:0.8rem; 
+
+}
+.buttons p{
+margin-top: -10px;;
+}
+
+.buttons .continue
+{
+color:white;
+background-color:rgb(216, 137, 84);
+margin-left:10px;
+
+}
+
+.buttons .continue:hover
+{
+  background-color:rgb(70, 17, 4) ;
+}
+.buttons .exit{
+color:rgb(78, 41, 7) ;
+}
+
+.buttons .exit:hover
+{
+  color:white;
+  background-color:rgb(216, 137, 84);
 }
