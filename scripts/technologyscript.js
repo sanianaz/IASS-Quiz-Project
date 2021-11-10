@@ -57,16 +57,10 @@ sleep(5000).then(() => {
   else {
     console.log("Need more time to load data");
   }
-
 });
 
 
-    if(availableQuestions.length == 0 || questionCounter > MAX_QUESTIONS) {
-        localStorage.setItem('mostRecentScore', score);
-        //go to the end page
-        
-        return window.location.assign("/pages/endtechnology.html");
-    }
+console.log("02. After sleep isPending ; ", isPending);
 
 
 
@@ -75,7 +69,6 @@ const progressText = document.querySelector('#progressText');
 const progressBarFull = document.querySelector("#progressBarFull");
 const MAX_QUESTIONS = 5;
 const SCORE_POINTS = 50;
-
 
 let points = 0;
 
