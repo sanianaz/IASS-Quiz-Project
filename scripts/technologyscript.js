@@ -31,37 +31,6 @@ function startQuiz() {
   show(questionsCollection[questionCount - 1]);
 }
 
-//Progress Bar
-const progressText = document.querySelector('#progressText');
-const progressBarFull = document.querySelector("#progressBarFull");
-let points = 0;
-
-sessionStorage.setItem("points", points);
-
-window.onload = function () {
-  document.getElementById("quizForm").style.display = "none";
-};
-
-function next() {
-  let index = questionCount - 1;
-  // if the question is last then redirect to final page
-  if (questionCount == questionsCollection.length) {
-    sessionStorage.setItem("time", time);
-    clearInterval(mytime);
-    location.href = "endtechnology.html";
-  }
-  let user_answer = document.querySelector("li.option.active").innerHTML;
-
-  // check if the answer is right or wrong
-  if (user_answer == questionsCollection[index].answer) {
-    points += 10;
-    sessionStorage.setItem("points", points);
-  }
-
-  questionCount++;
-  show(questionsCollection[questionCount - 1]);
-}
-
 function show(singleQuestion) {
   let question = document.getElementById("questions");
 
@@ -87,6 +56,29 @@ function show(singleQuestion) {
   progressBarFull.style.width = `${(questionCount / maxQuestions) * 100}%`;
 }
 
+function next() {
+  let index = questionCount - 1;
+  // if the question is last then redirect to final page
+  if (questionCount == questionsCollection.length) {
+    sessionStorage.setItem("time", time);
+    clearInterval(mytime);
+
+    sessionStorage.setItem("maxQuestions", maxQuestions);
+
+    location.href = "endtechnology.html";
+  }
+  let user_answer = document.querySelector("li.option.active").innerHTML;
+
+  // check if the answer is right or wrong
+  if (user_answer == questionsCollection[index].answer) {
+    points += 10;
+    sessionStorage.setItem("points", points);
+  }
+
+  questionCount++;
+  show(questionsCollection[questionCount - 1]);
+}
+
 function toggleActive() {
   let option = document.querySelectorAll("li.option");
   for (let i = 0; i < option.length; i++) {
@@ -100,3 +92,14 @@ function toggleActive() {
     };
   }
 }
+
+//Progress Bar
+const progressText = document.querySelector('#progressText');
+const progressBarFull = document.querySelector("#progressBarFull");
+let points = 0;
+
+sessionStorage.setItem("points", points);
+
+window.onload = function () {
+  document.getElementById("quizForm").style.display = "none";
+};

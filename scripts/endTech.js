@@ -1,3 +1,5 @@
+let maxQuestions = sessionStorage.getItem("maxQuestions");
+
 //Display the pictures
 function printPictures() {
 
@@ -5,11 +7,11 @@ function printPictures() {
     var messages = ["You really need to do better", "That's just okay", "Great job!"];
     var index = 0;
 
-    if (user_points < 20)
+    if (user_points < (maxQuestions * 5))
         index = 0;
-    else if (user_points < 50)
+    else if (user_points < (maxQuestions * 10))
         index = 1;
-    else if (user_points == 50)
+    else if (user_points == (maxQuestions * 10))
         index = 2;
 
     document.getElementById("showPicture").style.visibility = "visible";
@@ -19,11 +21,11 @@ function printPictures() {
 }
 
 
-
 //Display Points and Time
 // let user_name = sessionStorage.getItem("name");
 let user_points = sessionStorage.getItem("points");
 let user_time = sessionStorage.getItem("time");
+
 // document.querySelector("span.name").innerHTML = user_name;
 document.querySelector("span.time_taken").innerHTML = user_time;
 document.querySelector("span.points").innerHTML = user_points;
