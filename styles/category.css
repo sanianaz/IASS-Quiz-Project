@@ -230,8 +230,8 @@ button:hover {
 }
 
 .info-box .info-list .info span {
-  font-weight: 600;
-  color: rgba(8, 8, 8, 0.8);
+  font-weight: 900;
+  color: rgb(221, 118, 21);
 }
 
 .info-box .buttons {
