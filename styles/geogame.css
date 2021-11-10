@@ -127,10 +127,10 @@ h1 > span {
 /*PROGRESS BAR*/
 
 #progressBar {
-  width: 20rem;
+  width: 18rem;
   /*200 pixels by 40 pixels*/
   height: 4rem;
-  border: 0.3rem solid goldenrod;
+  border: 0.4rem solid goldenrod;
   margin-top: 1.5rem;
 }
 

@@ -80,6 +80,7 @@ h2 {
   font-size: 2.4rem;
   font-weight: 900;
   margin-bottom: 4rem;
+  color: #000;
 }
 
 h1 {
@@ -111,7 +112,7 @@ h1 > span {
 
 .choice-prefix {
   padding: 1.5rem 2.5rem;
-  background-color: #0d487a;
+  background-color: #0d7a25;
   color: white;
 }
 .choice-text {
@@ -133,33 +134,37 @@ h1 > span {
 #hud {
   display: flex;
   justify-content: space-around;
+  color: #0d7a12;
 }
 
 .hud-prefix {
   text-align: center;
   font-size: 2rem;
   font-weight: 900;
-  color: #000;
+  color: #0d7a12;
 }
 
 .hud-main-text {
   text-align: center;
   font-weight: 900;
+  color: #0d7a12;
 }
 
 /*PROGRESS BAR*/
 
 #progressBar {
-  width: 20rem;
+  width: 18rem;
   /*200 pixels by 40 pixels*/
   height: 4rem;
-  border: 0.3rem solid #0d487a;
+  border: 0.4rem solid #0d7a12;
   margin-top: 1.5rem;
 }
 
 #progressBarFull {
   height: 3.5rem;
-  background-color: #0d487a;
+  /* margin-top: 0;
+  margin-left: 0; */
+  background-color: #0d7a12;
   width: 0%;
 }
 
