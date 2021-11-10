@@ -1,14 +1,3 @@
-//Firesbase
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-// import {
-//   getFirestore,
-//   collection,
-//   addDoc,
-//   doc,
-//   deleteDoc,
-//   getDocs,
-// } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyD7fyHoEfbBF3FDuGeeklrNUKs9uWcfkXo",
   authDomain: "technologyquiz-a7ac3.firebaseapp.com",
@@ -21,101 +10,60 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = firebase.initializeApp(firebaseConfig);
-//   const analytics = getAnalytics(app);
 var db = firebase.firestore(app);
-//console.log(db);
 
 //Importing questions from FireStore
-var questions = [];
-let isPending = true;
-
+var questionsCollection = [];
 let questionCount = 1;
-
+let maxQuestions = 0;
 
 db.collection("quizQuestions").get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
-    questions.push(doc.data());
+    questionsCollection.push(doc.data());
   });
-  //console.log("01. questions ; ", (questions));
-  isPending = false;
+  startQuiz();
 });
 
-// sleep time expects milliseconds
-function sleep(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
+function startQuiz() {
+  maxQuestions = questionsCollection.length;
+  document.getElementById("loadMsg").style.display = "none";
+  document.getElementById("quizForm").style.display = "block";
+  show(questionsCollection[questionCount - 1]);
 }
-
-// // Usage!
-sleep(5000).then(() => {
-  // Do something after the sleep!
-  console.log("01. isPending ; ", isPending);
-
-  if (isPending == false) {
-    console.log("Data loaded successfully ! ");
-    show(questions[questionCount - 1]);
-  }
-  else {
-    console.log("Need more time to load data");
-  }
-});
-
-
-console.log("02. After sleep isPending ; ", isPending);
-
-
 
 //Progress Bar
 const progressText = document.querySelector('#progressText');
 const progressBarFull = document.querySelector("#progressBarFull");
-const MAX_QUESTIONS = 5;
-const SCORE_POINTS = 50;
-
 let points = 0;
 
 sessionStorage.setItem("points", points);
 
 window.onload = function () {
-  show();
-
+  document.getElementById("quizForm").style.display = "none";
 };
-function next() {
 
+function next() {
   let index = questionCount - 1;
   // if the question is last then redirect to final page
-  if (questionCount == questions.length) {
+  if (questionCount == questionsCollection.length) {
     sessionStorage.setItem("time", time);
     clearInterval(mytime);
     location.href = "endtechnology.html";
   }
-  console.log("point before : ", points);
   let user_answer = document.querySelector("li.option.active").innerHTML;
-  // check if the answer is right or wrong
-  if (user_answer == questions[index].answer) {
-    points += 10;
 
-    console.log("point after ", points);
+  // check if the answer is right or wrong
+  if (user_answer == questionsCollection[index].answer) {
+    points += 10;
     sessionStorage.setItem("points", points);
   }
 
-
-
-
-
-  console.log("user_answer : ", user_answer);
-  console.log(" questions[index].answer : ", questions[index].answer);
-  // console.log(" points : ", points);
-
-
   questionCount++;
-  show(questions[questionCount - 1]);
+  show(questionsCollection[questionCount - 1]);
 }
 
 function show(singleQuestion) {
-
-  console.log("singleQuestion : ", singleQuestion);
-
   let question = document.getElementById("questions");
-  // let index = questionCount - 1;
 
   let first = singleQuestion.option01;
   let second = singleQuestion.option02;
@@ -134,11 +82,9 @@ function show(singleQuestion) {
 
   toggleActive();
 
-  progressText.innerText = `Question ${questionCount} of ${MAX_QUESTIONS}`;
+  progressText.innerText = `Question ${questionCount} of ${maxQuestions}`;
   //update the progress bar
-  progressBarFull.style.width = `${(questionCount / MAX_QUESTIONS) * 100}%`;
-
-
+  progressBarFull.style.width = `${(questionCount / maxQuestions) * 100}%`;
 }
 
 function toggleActive() {
