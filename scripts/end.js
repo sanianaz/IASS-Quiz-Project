@@ -42,30 +42,17 @@ saveHighScore = e => {
     //console.log(highScores);
 };
 
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
-//   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-analytics.js";
-//   // TODO: Add SDKs for Firebase products that you want to use
-//   // https://firebase.google.com/docs/web/setup#available-libraries
 
-//   // Your web app's Firebase configuration
-//   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-//   const firebaseConfig = {
-//     apiKey: "AIzaSyBLYTA8fYp_hkN1my_rOhd6lvYqjm-diQQ",
-//     authDomain: "iass-quiz-project-e3af3.firebaseapp.com",
-//     databaseURL: "https://iass-quiz-project-e3af3-default-rtdb.firebaseio.com",
-//     projectId: "iass-quiz-project-e3af3",
-//     storageBucket: "iass-quiz-project-e3af3.appspot.com",
-//     messagingSenderId: "851253967048",
-//     appId: "1:851253967048:web:e7401c98724ec59e314dfd",
-//     measurementId: "G-1KR4GYNJSE"
-//   };
+function popUp()
+  {
+    Swal.fire({
+    position: 'center',
+    icon: 'submitted',
+    title: 'Submitted',
+    showConfirmButton: true,
+    timer: 1500
+  })
+}
 
-//   // Initialize Firebase
-//   const app = initializeApp(firebaseConfig);
-//   const analytics = getAnalytics(app);
-// //Add to firebase
-// var firebaseRef = firebase.database().ref(mostRecentScore)
-// const x = username.value;
-// const y = mostRecentScore;
-// firebaseRef.push(x);
-// firebaseRef.push(y);
+
+

@@ -219,7 +219,7 @@ body {
       rgba(255, 255, 255, 0.7),
       rgba(255, 255, 255, 0.7)
     ),
-    url('/Images/globe.gif');
+    url('/Images/score3.gif');
   /*background-image:url('/Images/geo.png');*/
   position: absolute;
   top: 0px;
@@ -229,8 +229,8 @@ body {
 
   /*background-position: 0px 0px;*/
   background-position: center;
-  background-size: stretch;
-
+  background-size: cover;
+  background-repeat: repeat;
   animation: 60s linear 0s infinite normal none running animatedBackground;
 }
 @keyframes animatedBackground {
