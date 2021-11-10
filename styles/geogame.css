@@ -23,7 +23,6 @@
     margin: 0 auto;
     padding: 2rem;
     position: relative;
-    background-color: rgb(46, 129, 202);
 
 }
 
@@ -204,6 +203,7 @@ input::placeholder {
     width: 12rem;
     height: 12rem;
     animation: spin 2s linear infinite;
+    justify-content: center;
 }
 
 @keyframes spin {
