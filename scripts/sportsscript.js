@@ -53,7 +53,7 @@ fetch(
             question: loadedQuestion.question
         };
         const answerChoices = [ ... loadedQuestion.incorrect_answers];
-        formattedQuestion.answer = Math.floor(Math.random()+3) +1;
+        formattedQuestion.answer = Math.floor(Math.random()*3) +1;
         answerChoices.splice(formattedQuestion.answer -1, 0, 
             loadedQuestion.correct_answer);
 
@@ -97,7 +97,7 @@ getNewQuestion = () => {
         localStorage.setItem('mostRecentScore', score);
         //go to the end page
         
-        return window.location.assign("/pages/endsports.html");
+        return window.location.assign("/pages/end.html");
     }
 
     questionCounter++;

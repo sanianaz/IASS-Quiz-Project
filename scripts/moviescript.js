@@ -1,81 +1,177 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-const progressText = document.getElementById('progressText');
+const ProgressText = document.getElementById("progress-text");
 const scoreText  = document.getElementById('score');
 const progressBarFull = document.getElementById('progressBarFull');
 const loader = document.getElementById('loader');
 const game = document.getElementById('game');
 
-let currentQuestion = {};
-let acceptingAnswers = true;
+let currentQuestion = {}; // object
+let acceptingAnswers = false; //for delay before accepting next 
 let score = 0;
 let questionCounter = 0;
-let availableQuestions = [];
+let availableQuestions = []; // Array
 
-let questions = []; // HARD CODED QUESTIONS IF NECESSARY
-/*{
-        question: "Inside which HTML element do we put the JavaScript?",
-        choice1: "<script>",
-        choice2: "<javascript>",
-        choice3: "<js>",
-        choice4: "<scripting>",
-        answer: 1
-},
-{
-    question: "Where is Mount Fuji located?",
-    choice1: "China",
-    choice2: "Japan",
-    choice3: "Taiwan",
-    choice4: "South Korea",
-    answer: 2
 
-},
-{
-    question: "Which animal except us humans like spicy food?",
-        choice1: "The Capybara",
-        choice2: "Lemurs",
-        choice3: "Tree Shrews",
-        choice4: "Kiwi birds",
-        answer: 3
-}];*/
+// HARD CODED QUESTIONS IF NECESSARY
+let questions = [
+    // Question number 1
+{ 
+        question: "'La La Land' filmed Entirely in ?", 
 
-//JSON
-fetch(
-    "https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple"
-    )
-.then(res => {
-    return res.json();
-})
-.then(loadedQuestions => {
-    console.log(loadedQuestions.results);
-    questions = loadedQuestions.results.map( loadedQuestion => {
-        const formattedQuestion = {
-            question: loadedQuestion.question
-        };
-        const answerChoices = [ ... loadedQuestion.incorrect_answers];
-        formattedQuestion.answer = Math.floor(Math.random()+3) +1;
-        answerChoices.splice(formattedQuestion.answer -1, 0, 
-            loadedQuestion.correct_answer);
+        choice1: "Vancouver", 
 
-        answerChoices.forEach((choice, index) => {
-            formattedQuestion["choice" + (index+1)] = choice;
-        })
-        return formattedQuestion;
-    });
-    
-    startGame();
+        choice2: "London", 
 
-    //questions = loadedQuestions; - for without API
-    //startGame(); - for without API
-})
-.catch( err => {
-    console.error(err);
-});
-//JSON
+        choice3: "Sydney", 
+
+        choice4: "Stockholm", 
+
+        answer: 1 
+}, 
+ // Question number 2
+{ 
+ question: "'Superman' made his first appearance in ?", 
+
+    choice1: "2000", 
+
+    choice2: "1948", 
+
+    choice3: "1900", 
+
+    choice4: "1840", 
+
+    answer: 2 
+}, 
+ // Question number 3
+{ 
+    question: "The nickname of Morgan Freeman's character in 'Million Dollar Baby' is .", 
+
+        choice1: "Red", 
+
+        choice2: "Blue", 
+
+        choice3: "Violet", 
+
+        choice4: "Black", 
+
+        answer: 1 
+
+}, 
+ // Question number 4
+{ 
+question: "'Greenberg' is a comedy movie about a middle-aged man trying to overcome his recent nervous breakdown. Who is the lead actor in this film" ,
+
+        choice1: "Owen Wilson", 
+
+        choice2: "Ben Stiller", 
+
+        choice3: "Paul Rudd", 
+
+        choice4: "Hugh Grant", 
+
+        answer: 2 
+}, 
+ // Question number 5
+{ 
+question: "Which 2012 Tim Burton movie features Johnny Depp as a vampire with the name of Barnabas Collins? ", 
+
+        choice1: " Dark knight", 
+
+        choice2: "shadow hunter", 
+
+        choice3: " Dark Shadows ", 
+
+        choice4: "Black Panther", 
+
+        answer: 3 
+}, 
+ // Question number 6
+{ 
+question: "In this 2011 film, a man takes a drug that allows him to access 100% of his brain. Things do not go his way, however, when he becomes addicted and runs out of drugs. Which film is this?. ", 
+
+        choice1: "Fast", 
+
+        choice2: "Lazy", 
+
+        choice3: "Limitless", 
+
+        choice4: "Worthless", 
+
+        answer: 3 
+}, 
+ // Question number 7
+{ 
+question: "Jake Gyllenhaal starred in a 2011 film about a man who relives a train explosion over and over again. What is the film? ", 
+
+        choice1: "Source Code", 
+
+        choice2: "Java Script", 
+
+        choice3: "Dark Code", 
+
+        choice4: "Resource", 
+
+        answer: 1 
+}, 
+  // Question number 8
+{ 
+question: "2012 - Guess the movie this quote comes from. Tony: 'Genius, billionaire, playboy, philanthropist'.", 
+
+        choice1: "Deep Blue Sea", 
+
+        choice2: "Avengers", 
+
+        choice3: "Notebook", 
+
+        choice4: "Saw", 
+
+        answer: 2 
+}, 
+ // Question number 9
+{ 
+question: "Which film, the seventh in its series,featured several high-speed car chases, and starred Vin Diesel, Paul Walker, and Dwayne Johnson? ", 
+
+        choice1: "Racer", 
+
+        choice2: "Furious 2", 
+
+        choice3: "Cars", 
+
+        choice4: "Furious 7", 
+
+        answer: 4 
+
+}, 
+ // Question number 10
+{ 
+question: "This dramedy about two dysfunctional people who fall in love, including Jennifer Lawrence, Bradley Cooper and Robert De Niro. What was the film? ", 
+
+        choice1: " Silver Linings Playbook ", 
+
+        choice2: " Red Linings Playbook ", 
+
+        choice3: " Silver Linings Playland ", 
+
+        choice4: " Silver square Playbook ", 
+
+        answer: 1 
+}
+];
+
+// let questions = [];
+// fetch(
+//     "questions.json").then(res => {
+//     return res.json();
+// }).then(loadedQuestions => {
+//     console.log(loadedQuestions);
+//     questions= loadedQuestions;
+//     startGame();
+// });
 
 //CONSTANS
 const CORRECT_BONUS = 10;
-// const MAX_QUESTIONS = 3 ===== because of the hard code + json
+// const MAX_QUESTIONS = 10 =====
 const MAX_QUESTIONS = 10;
 
 
@@ -83,11 +179,12 @@ startGame = () => {
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
+    //console.log(availableQuestions);
     getNewQuestion();
     game.classList.remove("hidden");
     loader.classList.add("hidden");
-        //console.log(availableQuestions);
-        //getNewQuestion();
+       
+        
 
 };
 
@@ -97,62 +194,86 @@ getNewQuestion = () => {
         localStorage.setItem('mostRecentScore', score);
         //go to the end page
         
-        return window.location.assign("/pages/endmovie.html");
-    }
-
+        return window.location.assign("/pages/end.html");
+    } //local storage score
     questionCounter++;
     progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
     //update the progress bar
     //console.log(questionCounter / MAX_QUESTIONS);
-    progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+    progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}% `;
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
+    console.log(questionIndex);
     currentQuestion = availableQuestions[questionIndex];
+    //console.log(currentQuestion);
     question.innerText = currentQuestion.question;
+    //console.log(currentQuestion.question);
 
-    choices.forEach( choice => {
-        const number = choice.dataset['number'];
-        choice.innerText = currentQuestion['choice' + number];
-    });
+    choices.forEach(choice => {
+    const number = choice.dataset['number'];
+    //console.log(number);
+    choice.innerText = currentQuestion['choice'+ number];
+    //console.log( currentQuestion['choice'+number]);
+    }); //choice
 
-    availableQuestions.splice(questionIndex, 1);
-
+    availableQuestions.splice(questionIndex, 1); // to remove the question from queue
+//console.log(availableQuestions);
     acceptingAnswers = true;
-};
+}; //get new question
 
 choices.forEach(choice => {
     choice.addEventListener("click", e => {
+        //console.log(e.target);
         if(!acceptingAnswers) return;
 
         acceptingAnswers = false;
         const selectedChoice = e.target;
         const selectedAnswer = selectedChoice.dataset["number"];
-        //console.log(selectedAnswer);
 
-        const classToApply = 
+        //console.log(selectedAnswer== currentQuestion.answer);
+       
+        //through ternary Operator
+         //to determine the correct and incorrect answer
+        const classToApply =
         selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-        //console.log(classToApply);
-
+        //console.log(currentQuestion.answer);
+        //console.log(selectedAnswer);
         if (classToApply === 'correct') {
             incrementScore(CORRECT_BONUS);
         }
 
-        selectedChoice.parentElement.classList.add(classToApply);
+       
+
         
-        setTimeout(() => {
+/*const classToApply: "InCorrect";
+        if (selectedAnswer== currentQuestion.answer)
+        { 
+            //console.log(selectedAnswer);
+            classToApply: "Correct";
+      }*/
+      //to apply green and color to correct and incorrect answer
+
+      selectedChoice.parentElement.classList.add(classToApply);
+      setTimeout(() => {
         selectedChoice.parentElement.classList.remove(classToApply);
         //console.log(selectedAnswer == currentQuestion.answer);
         getNewQuestion();
     }, 1000);
-    });
+        
+    });//choices-eventListeners
 });
 
 incrementScore = num => {
     score += num;
     scoreText.innerText = score;
-}
+} 
 
-//startGame(); ====== if we don't use JSON / API it needs to be in this spot
+ 
 
 
-//console.log("hello");
+
+startGame();
+
+
+
+
 

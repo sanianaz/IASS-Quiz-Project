@@ -19,11 +19,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 80rem;
+    max-width: 100rem;
     margin: 0 auto;
     padding: 2rem;
     position: relative;
-    background-color: rgb(46, 129, 202);
+    
 
 }
 
@@ -57,13 +57,17 @@
 
 h2 {
     font-size: 2.4rem;
-    font-weight: 500;
+    font-weight: 700;
     margin-bottom: 4rem;
+    width:76%;
+    margin-left:11.5rem;
+    
 }
+
 
 h1 {
     font-size: 5.4rem;
-    color: #0d487a;
+    color: #530408;
     margin-bottom: 5rem;
 }
 
@@ -75,37 +79,60 @@ h1  > span {
 .choice-container {
     display: flex;
     margin-bottom: 0.5rem;
-    width: 96.3%;
+    margin-left: 11rem;
+    width: 77.3%;
     font-size: 1.8rem;
-    border: 0.1rem solid rgba(7, 52, 92, 0.25);
-    background-color: white;
+    border: 0.1rem solid #530408;
+    background-color: #222;
+
 }
 
 .choice-container:hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(7, 52, 92, 0.25);
+    box-shadow: 0 0.4rem 1.4rem 0 #530408;
     transform: translateY(-0.1rem);
     transition: transform 150ms;
 }
 
 .choice-prefix {
     padding: 1.5rem 2.5rem;
-    background-color: #0d487a;
+    background: linear-gradient(-45deg, #6d560a, #610707, #333, #080808);
+    /*background-color: #530408;*/
+    
     color: white;
-}
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    overflow: hidden;
+  }
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+      transform: scale(20px);
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
 .choice-text {
     padding: 1.5rem;
     width: 100%;
+    color: white;
 }
 
 
 .correct {
     background-color: green;
 
+
 }
 
 .incorrect {
     background-color: red;
+
 }
 
 /*HUD - HEAD OF DISPLAY*/
@@ -119,27 +146,33 @@ h1  > span {
 .hud-prefix {
     text-align: center;
     font-size: 2rem;
+    margin-top: 4rem;
+    font-weight: 600;
 }
 
 .hud-main-text {
     text-align: center;
+    color:#530408;
+    font-weight: 600;
 }
 
 /*PROGRESS BAR*/
 
 
 #progressBar {
-    width: 20rem;
+    width: 18rem;
     /*200 pixels by 40 pixels*/
     height: 4rem;
-    border: 0.3rem solid #0d487a;
+    border: 0.4rem solid #530408;
     margin-top: 1.5rem;
+    
 }
 
 #progressBarFull {
     height: 3.5rem;
-    background-color: #0d487a;
+    background-color: #530408;
     width: 0%;
+    
 }
 
 /*BUTTONS*/
@@ -149,18 +182,20 @@ h1  > span {
     padding: 1rem 0;
     width: 20rem;
     text-align: center;
-    border: 0.1rem solid #0d487a;
+    border: 0.1rem solid #530408;
     margin-bottom: 1rem;
     text-decoration: none;
-    color: #56a5eb;
-    background-color: white;
+    color: #241f1f;
+    
 }
 
 .btn:hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgb(86, 185, 235, 0.5);
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(71, 7, 23, 0.5);
     transform: translateY(-0.1rem);
     transition: transform 150ms;
+    background: linear-gradient(-45deg, #333, #610707, #333, #080808);
+    color: white;
 }
 
 .btn[disabled]:hover {
@@ -184,11 +219,14 @@ input {
     padding: 1.5rem;
     font-size: 1.8rem;
     border: none;
-    box-shadow: 0 0.1rem 1.4rem 0 rgb(86, 185, 235, 0.5);
+    box-shadow: 0 0.1rem 1.4rem 0  rgba(71, 7, 23, 0.5);
+    background-color: #222;
+    color: white;
+    
 }
 
 input::placeholder {
-    color: #aaa;
+    color: white;
 }
 
 /*LOADER*/
@@ -196,7 +234,7 @@ input::placeholder {
 #loader {
     border: 1.6rem solid white;
     border-radius: 50%;
-    border-top: 1.6rem solid #56a5eb;
+    border-top: 1.6rem solid #530408;
     width: 12rem;
     height: 12rem;
     animation: spin 2s linear infinite;
@@ -217,13 +255,14 @@ input::placeholder {
     background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./landmark4.png');*/
     
     
-    background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255)), url('/Images/filmstrip.jpeg');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255 ,0.7)), url('/Images/filmstrip.jpg');
     /*background-image:url('/Images/geo.png');*/
     position: absolute;
     top: 0px;
     bottom: 0px;
-    left: 0px;
-    right: 0px;
+    
+    width: 100vw;
+    background-repeat:repeat ;
    
    
     /*background-position: 0px 0px;*/
@@ -237,4 +276,34 @@ input::placeholder {
     to {
       background-position: 0 -1000px;
     }
+  }
+
+  .main{
+    background-image: linear-gradient(rgba(173, 162, 162, 0.7), rgba(255, 255, 255, 0.7));
+      box-shadow:0 0 0 .25rem rgba(black);
+      border-radius: 10px;
+      border: 1px solid white;
+      width: 76%;
+      margin-left: 118px;
+      padding-top:20px;
+      padding-bottom:20px;
+  }
+
+  .End{
+    /*background-image: url(https://codetalks.tv/public/svg/global/texture-dev.svg);
+    background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./landmark4.png');*/
+    
+    
+    background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255 ,0.7)), url('/Images/score3.gif');
+    /*background-image:url('/Images/geo.png');*/
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    
+    width: 100vw;
+    background-repeat:repeat ;
+   
+   
+    /*background-position: 0px 0px;*/
+     background-position: center;
   }

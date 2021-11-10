@@ -10,7 +10,7 @@ let imgBx = document.querySelectorAll('.imgBx');
 	      navigation.classList.toggle('active');
 	    }
 
-		function myFunction() {
-			document.getElementById("demo").innerHTML = 
-			'" - Hi! Did you know the human brain contains around one hundred billion neurons?"';
-		}
+		//function myFunction() {
+		//	document.getElementById("demo").innerHTML = 
+		//	'" - Hi! Did you know the human brain contains around one hundred billion neurons?"';
+		//}

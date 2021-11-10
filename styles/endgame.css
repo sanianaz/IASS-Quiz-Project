@@ -127,10 +127,10 @@ h1 > span {
 /*PROGRESS BAR*/
 
 #progressBar {
-  width: 18rem;
+  width: 20rem;
   /*200 pixels by 40 pixels*/
   height: 4rem;
-  border: 0.4rem solid goldenrod;
+  border: 0.3rem solid goldenrod;
   margin-top: 1.5rem;
 }
 
@@ -219,7 +219,7 @@ body {
       rgba(255, 255, 255, 0.7),
       rgba(255, 255, 255, 0.7)
     ),
-    url('/Images/globe.gif');
+    url('/Images/score3.gif');
   /*background-image:url('/Images/geo.png');*/
   position: absolute;
   top: 0px;
@@ -229,8 +229,8 @@ body {
 
   /*background-position: 0px 0px;*/
   background-position: center;
-  background-size: stretch;
-
+  background-size: cover;
+  background-repeat: repeat;
   animation: 60s linear 0s infinite normal none running animatedBackground;
 }
 @keyframes animatedBackground {
@@ -240,4 +240,8 @@ body {
   to {
     background-position: 0 -1000px;
   }
+}
+
+.highscore {
+  background: white;
 }

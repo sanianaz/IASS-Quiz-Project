@@ -23,17 +23,32 @@ saveHighScore = e => {
     e.preventDefault();
 
     const score = {
-        score: Math.floor(Math.random() * 100),
-        name: username.value
+        score:mostRecentScore,
+        //score: Math.floor(Math.random(mostRecentScore)*100),
+        name: username.value,
+        
+        
     };
 
     highScores.push(score);
+    console.log(score);
     highScores.sort( (a,b) => b.score - a.score);
     //Sorted array, return function
     highScores.splice(5);
 
 
     localStorage.setItem('highScores', JSON.stringify(highScores));
-    window.location.assign("/");
+    // window.location.assign("/index.html");
     //console.log(highScores);
 };
+
+function popUp()
+  {
+    Swal.fire({
+    position: 'center',
+    icon: 'submitted',
+    title: 'Submitted',
+    showConfirmButton: true,
+    timer: 1500
+  })
+}

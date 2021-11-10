@@ -2,7 +2,7 @@ A quiz project by using external Api and Firebase :-) we will use Html , CSS, Ja
 
 ================ GIT Instructions: To begin, open up a terminal and create a local directory for your project Go into the newly created directory (cd command) Then try below commands git init
 
-git remote add origin https://github.com/sudhamadhuripoojari/IASS-Project.git
+git remote add origin https://github.com/sanianaz/IASS-Quiz-Project
 
 OPTIONAL (if you work on default master branch) : git checkout -b
 
