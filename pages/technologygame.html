@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset=UTF-8>
-  <meta name="viewport" content="width-device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
-  <title>Technology-Quizzer</title>
-  <!--<link rel="stylesheet" href="/styles/app.css"/>-->
-  <link rel="stylesheet" href="/styles/technologygame.css"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/technologygame.css">
+    <title>Technology Quiz</title>
 </head>
 <body>
-<div class="container">
-    <div id="loader">.</div>
-    <div id="game" class="justify-center flex-column hidden">
-        <div id="hud">
-            <div id="hud-item">
-                <p id="progressText" class="hud-prefix">
-            Question
-            </p>
-            <div id="progressBar">
-                <div id="progressBarFull">
-                </div>
+    <div class="wrapper">
+      <!-- <div id="loader">.</div> -->
+        <div id ="quiz" class="quiz">
+          <div class="quiz_header">
+            <div class="hud-item"> 
+              <p id="progressText" class="hud-prefix">Question</p>
+              <div id="progressBar">
+                <div id="progressBarFull"></div>
+              </div>
             </div>
-        <h1 class="hud-main-text" id="questionCounter">
+            <div class="quiz_user">
+              <h2>Tech Quiz! <span class="name"></span></h2>
+            </div>
+            <div class="quiz_timer">
+              <span class="time">00:00</span>
+            </div>
+          </div>
+          <div class="quiz_body">
+            <div id="questions">
             
-        </h1>
-    </div>
-    <div id="hud-item">
-        <p class="hud-prefix">
-        Score
-    </p>
-        <h1 class="hud-main-text" id="score">
-    0
-        </h1>
+              <ul class="option_group">
+                <li class="option">Option 1</li>
+                <li class="option">Option 2</li>
+                <li class="option">Option 3</li>
+                <li class="option">Option 4</li>
+              </ul>
+            </div>
+  
+           <button class="btn-next" onClick="next();">Next Question</button>
+          </div>
         </div>
+        <img src="../Images/steveJobs-removebg-preview.png" class="steveJobsImg"alt="">
+      </div>
+      <audio  controls autoplay  loop> 
+        <source src="../Images/file_example_MP3_700KB.mp3">
+    </audio>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-        </div>
-    <h2 id="question"></h2>    
-    <div class="choice-container">
-        <p class="choice-prefix">A</p>
-        <p class="choice-text" data-number="1"></p></div>
-    <div class="choice-container">
-        <p class="choice-prefix">B</p>
-        <p class="choice-text" data-number="2"></p></div>
-    <div class="choice-container">
-        <p class="choice-prefix">C</p>
-        <p class="choice-text" data-number="3"></p></div>
-    <div class="choice-container">
-        <p class="choice-prefix">D</p>
-        <p class="choice-text" data-number="4"></p></div>
-    </div>
-    </div>
-    <script src="/scripts/technologyscript.js"></script>
+      <script src="../scripts/technologyscript.js"></script>
+      <script src="../scripts/timerTech.js"></script>
+      <script src="../scripts/endTech.js"></script>
 </body>
 </html>

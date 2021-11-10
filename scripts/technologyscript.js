@@ -1,158 +1,158 @@
-const question = document.getElementById("question");
-const choices = Array.from(document.getElementsByClassName("choice-text"));
-const progressText = document.getElementById('progressText');
-const scoreText  = document.getElementById('score');
-const progressBarFull = document.getElementById('progressBarFull');
-const loader = document.getElementById('loader');
-const game = document.getElementById('game');
+//Firesbase
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+// import {
+//   getFirestore,
+//   collection,
+//   addDoc,
+//   doc,
+//   deleteDoc,
+//   getDocs,
+// } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
 
-let currentQuestion = {};
-let acceptingAnswers = true;
-let score = 0;
-let questionCounter = 0;
-let availableQuestions = [];
-
-let questions = []; // HARD CODED QUESTIONS IF NECESSARY
-/*{
-        question: "Inside which HTML element do we put the JavaScript?",
-        choice1: "<script>",
-        choice2: "<javascript>",
-        choice3: "<js>",
-        choice4: "<scripting>",
-        answer: 1
-},
-{
-    question: "Where is Mount Fuji located?",
-    choice1: "China",
-    choice2: "Japan",
-    choice3: "Taiwan",
-    choice4: "South Korea",
-    answer: 2
-
-},
-{
-    question: "Which animal except us humans like spicy food?",
-        choice1: "The Capybara",
-        choice2: "Lemurs",
-        choice3: "Tree Shrews",
-        choice4: "Kiwi birds",
-        answer: 3
-}];*/
-
-//JSON
-fetch(
-    "https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple"
-    )
-.then(res => {
-    return res.json();
-})
-.then(loadedQuestions => {
-    console.log(loadedQuestions.results);
-    questions = loadedQuestions.results.map( loadedQuestion => {
-        const formattedQuestion = {
-            question: loadedQuestion.question
-        };
-        const answerChoices = [ ... loadedQuestion.incorrect_answers];
-        formattedQuestion.answer = Math.floor(Math.random()+3) +1;
-        answerChoices.splice(formattedQuestion.answer -1, 0, 
-            loadedQuestion.correct_answer);
-
-        answerChoices.forEach((choice, index) => {
-            formattedQuestion["choice" + (index+1)] = choice;
-        })
-        return formattedQuestion;
-    });
-    
-    startGame();
-
-    //questions = loadedQuestions; - for without API
-    //startGame(); - for without API
-})
-.catch( err => {
-    console.error(err);
-});
-//JSON
-
-//CONSTANS
-const CORRECT_BONUS = 10;
-// const MAX_QUESTIONS = 3 ===== because of the hard code + json
-const MAX_QUESTIONS = 10;
-
-
-startGame = () => {
-    questionCounter = 0;
-    score = 0;
-    availableQuestions = [...questions];
-    getNewQuestion();
-    game.classList.remove("hidden");
-    loader.classList.add("hidden");
-        //console.log(availableQuestions);
-        //getNewQuestion();
-
+const firebaseConfig = {
+  apiKey: "AIzaSyD7fyHoEfbBF3FDuGeeklrNUKs9uWcfkXo",
+  authDomain: "technologyquiz-a7ac3.firebaseapp.com",
+  projectId: "technologyquiz-a7ac3",
+  storageBucket: "technologyquiz-a7ac3.appspot.com",
+  messagingSenderId: "217503801848",
+  appId: "1:217503801848:web:852d6377c545f386d1360d",
+  measurementId: "G-0YDTPX9TSC"
 };
 
-getNewQuestion = () => {
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+//   const analytics = getAnalytics(app);
+var db = firebase.firestore(app);
+//console.log(db);
 
-    if(availableQuestions.length == 0 || questionCounter > MAX_QUESTIONS) {
-        localStorage.setItem('mostRecentScore', score);
-        //go to the end page
-        
-        return window.location.assign("/pages/endtechnology.html");
-    }
+//Importing questions from FireStore
+var questions = [];
+let isPending = true;
 
-    questionCounter++;
-    progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
-    //update the progress bar
-    //console.log(questionCounter / MAX_QUESTIONS);
-    progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
-    const questionIndex = Math.floor(Math.random() * availableQuestions.length);
-    currentQuestion = availableQuestions[questionIndex];
-    question.innerText = currentQuestion.question;
+let questionCount = 1;
 
-    choices.forEach( choice => {
-        const number = choice.dataset['number'];
-        choice.innerText = currentQuestion['choice' + number];
-    });
 
-    availableQuestions.splice(questionIndex, 1);
-
-    acceptingAnswers = true;
-};
-
-choices.forEach(choice => {
-    choice.addEventListener("click", e => {
-        if(!acceptingAnswers) return;
-
-        acceptingAnswers = false;
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset["number"];
-        //console.log(selectedAnswer);
-
-        const classToApply = 
-        selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-        //console.log(classToApply);
-
-        if (classToApply === 'correct') {
-            incrementScore(CORRECT_BONUS);
-        }
-
-        selectedChoice.parentElement.classList.add(classToApply);
-        
-        setTimeout(() => {
-        selectedChoice.parentElement.classList.remove(classToApply);
-        //console.log(selectedAnswer == currentQuestion.answer);
-        getNewQuestion();
-    }, 1000);
-    });
+db.collection("quizQuestions").get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    questions.push(doc.data());
+  });
+  //console.log("01. questions ; ", (questions));
+  isPending = false;
 });
 
-incrementScore = num => {
-    score += num;
-    scoreText.innerText = score;
+// sleep time expects milliseconds
+function sleep(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-//startGame(); ====== if we don't use JSON / API it needs to be in this spot
+// // Usage!
+sleep(5000).then(() => {
+  // Do something after the sleep!
+  console.log("01. isPending ; ", isPending);
+
+  if (isPending == false) {
+    console.log("Data loaded successfully ! ");
+    show(questions[questionCount - 1]);
+  }
+  else {
+    console.log("Need more time to load data");
+  }
+
+});
 
 
-//console.log("hello");
+console.log("02. After sleep isPending ; ", isPending);
 
+
+
+//Progress Bar
+const progressText = document.querySelector('#progressText');
+const progressBarFull = document.querySelector("#progressBarFull");
+const MAX_QUESTIONS = 5;
+const SCORE_POINTS = 50;
+
+
+let points = 0;
+
+sessionStorage.setItem("points", points);
+
+window.onload = function () {
+  show();
+
+};
+function next() {
+
+  let index = questionCount - 1;
+  // if the question is last then redirect to final page
+  if (questionCount == questions.length) {
+    sessionStorage.setItem("time", time);
+    clearInterval(mytime);
+    location.href = "endtechnology.html";
+  }
+  console.log("point before : ", points);
+  let user_answer = document.querySelector("li.option.active").innerHTML;
+  // check if the answer is right or wrong
+  if (user_answer == questions[index].answer) {
+    points += 10;
+
+    console.log("point after ", points);
+    sessionStorage.setItem("points", points);
+  }
+
+
+
+
+
+  console.log("user_answer : ", user_answer);
+  console.log(" questions[index].answer : ", questions[index].answer);
+  // console.log(" points : ", points);
+
+
+  questionCount++;
+  show(questions[questionCount - 1]);
+}
+
+function show(singleQuestion) {
+
+  console.log("singleQuestion : ", singleQuestion);
+
+  let question = document.getElementById("questions");
+  // let index = questionCount - 1;
+
+  let first = singleQuestion.option01;
+  let second = singleQuestion.option02;
+  let third = singleQuestion.option03;
+  let fourth = singleQuestion.option04;
+
+  question.innerHTML = `
+  <h2>Q${questionCount}. ${singleQuestion.question}</h2>
+   <ul class="option_group">
+  <li class="option">${first}</li>
+  <li class="option">${second}</li>
+  <li class="option">${third}</li>
+  <li class="option">${fourth}</li>
+</ul> 
+  `;
+
+  toggleActive();
+
+  progressText.innerText = `Question ${questionCount} of ${MAX_QUESTIONS}`;
+  //update the progress bar
+  progressBarFull.style.width = `${(questionCount / MAX_QUESTIONS) * 100}%`;
+
+
+}
+
+function toggleActive() {
+  let option = document.querySelectorAll("li.option");
+  for (let i = 0; i < option.length; i++) {
+    option[i].onclick = function () {
+      for (let i = 0; i < option.length; i++) {
+        if (option[i].classList.contains("active")) {
+          option[i].classList.remove("active");
+        }
+      }
+      option[i].classList.add("active");
+    };
+  }
+}
