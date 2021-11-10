@@ -82,7 +82,7 @@ question: "Which 2012 Tim Burton movie features Johnny Depp as a vampire with th
 
         choice3: " Dark Shadows ", 
 
-        choice4: "Black Penther", 
+        choice4: "Black Panther", 
 
         answer: 3 
 }, 
