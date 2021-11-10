@@ -82,7 +82,7 @@ question: "Which 2012 Tim Burton movie features Johnny Depp as a vampire with th
 
         choice3: " Dark Shadows ", 
 
-        choice4: "Black Penther", 
+        choice4: "Black Panther", 
 
         answer: 3 
 }, 
@@ -120,7 +120,7 @@ question: "2012 - Guess the movie this quote comes from. Tony: 'Genius, billiona
 
         choice1: "Deep Blue Sea", 
 
-        choice2: "Dark Knight Rises", 
+        choice2: "Avengers", 
 
         choice3: "Notebook", 
 
