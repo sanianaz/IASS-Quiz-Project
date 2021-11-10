@@ -144,7 +144,7 @@ choices.forEach(choice => {
         selectedChoice.parentElement.classList.remove(classToApply);
         //console.log(selectedAnswer == currentQuestion.answer);
         getNewQuestion();
-    }, 200);
+    }, 500);
     });
 });
 
