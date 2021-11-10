@@ -159,6 +159,16 @@ question: "This dramedy about two dysfunctional people who fall in love, includi
 }
 ];
 
+// let questions = [];
+// fetch(
+//     "questions.json").then(res => {
+//     return res.json();
+// }).then(loadedQuestions => {
+//     console.log(loadedQuestions);
+//     questions= loadedQuestions;
+//     startGame();
+// });
+
 //CONSTANS
 const CORRECT_BONUS = 10;
 // const MAX_QUESTIONS = 10 =====
@@ -256,45 +266,14 @@ incrementScore = num => {
     score += num;
     scoreText.innerText = score;
 } 
-/*
+
  
 
-choices.forEach(choice => {
-    choice.addEventListener("click", e => {
-        if(!acceptingAnswers) return;
 
-        acceptingAnswers = false;
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset["number"];
-        //console.log(selectedAnswer);
-
-        const classToApply = 
-        selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-        //console.log(classToApply);
-
-        if (classToApply === 'correct') {
-            incrementScore(CORRECT_BONUS);
-        }
-
-        selectedChoice.parentElement.classList.add(classToApply);
-        
-        setTimeout(() => {
-        selectedChoice.parentElement.classList.remove(classToApply);
-        //console.log(selectedAnswer == currentQuestion.answer);
-        getNewQuestion();
-    }, 1000);
-    });
-});
-
-incrementScore = num => {
-    score += num;
-    scoreText.innerText = score;
-} */
-
-//startGame(); ====== if we don't use JSON / API it needs to be in this spot
-
-
-//console.log("hello");
 
 startGame();
+
+
+
+
 
