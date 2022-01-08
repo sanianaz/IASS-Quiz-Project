@@ -255,7 +255,7 @@ input::placeholder {
     background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./landmark4.png');*/
     
     
-    background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255 ,0.7)), url('/Images/filmstrip.jpg');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255 ,0.7)), url('./Images/filmstrip.jpg');
     /*background-image:url('/Images/geo.png');*/
     position: absolute;
     top: 0px;
